@@ -41,7 +41,7 @@ public class Backend {
     public void run(){
         int s = getS();
         long d = getD(s);
-        System.out.println("\n"+this.num + " = 2^"+s+" * "+d+"\n");
+        System.out.println("\n"+(this.num-1) + " = 2^"+s+" * "+d+"\n");
         long k=0;
         for(int i=0;i<repeats;i++) {
             boolean isPrime=false;
@@ -82,3 +82,4 @@ public class Backend {
         }
     }
 }
+
