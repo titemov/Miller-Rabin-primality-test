@@ -35,7 +35,9 @@ public class Backend {
     }
 
     private long getRandomNum(){
-        return new Random().nextLong(this.num);
+        long r = new Random().nextLong(this.num);
+        if(r==0) r=1;
+        return r;
     }
 
     public void run(){
@@ -82,4 +84,3 @@ public class Backend {
         }
     }
 }
-
