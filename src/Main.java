@@ -10,7 +10,7 @@ public class Main{
             if (num % 2 == 0) {
                 throw new Exception("Given number is even");
             }
-            if(num>Math.pow(2,62)-1){
+            if(num>Math.pow(2,62)-1 || num<=1){
                 throw new InputMismatchException();
             }
             System.out.print("Enter amount of repeats: ");
@@ -20,7 +20,7 @@ public class Main{
             b.run();
 
         }catch (InputMismatchException e){
-            System.out.println("Given number is greater than 2^62-1 or not a number.");
+            System.out.println("Given number is greater than 2^62-1 or lower than 1 or not a number.");
         }catch (Exception e) {
             System.out.println("Error! " + e);
         }
