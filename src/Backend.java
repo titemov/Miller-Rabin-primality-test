@@ -11,10 +11,6 @@ public class Backend {
         this.repeats=repeats;
     }
 
-    public long getNum(){
-        return this.num;
-    }
-
     private int getS(){
         int s = 0;
         long num = this.num - 1;
@@ -40,7 +36,7 @@ public class Backend {
         return r;
     }
 
-    public void run(){
+    public boolean run(){
         int s = getS();
         long d = getD(s);
         System.out.println("\n"+(this.num-1) + " = 2^"+s+" * "+d+"\n");
@@ -54,7 +50,7 @@ public class Backend {
                 System.out.println(randNum+"^"+pow+" mod "+ this.num);
                 FastPow fastPow = new FastPow(randNum, pow, this.num);
                 long remaining = fastPow.run();
-                //System.out.println("Remaining = "+remaining);
+
                 if(remaining==this.num-1 || remaining==1){
                     isPrime=true;
                     k+=1;
@@ -73,14 +69,12 @@ public class Backend {
                 System.out.println("Error! "+e);
             }
         }
-        //run all functions
-        //print result here
 
         System.out.println("\nResult: "+k+" out of "+this.repeats+" iterations proved primarity of "+this.num);
         if(k==repeats){
-            System.out.println("This number is prime.");
+            return true;
         }else{
-            System.out.println("This number is not prime.");
+            return false;
         }
     }
 }

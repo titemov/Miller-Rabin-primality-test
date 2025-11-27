@@ -1,19 +1,16 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class FastPow {
-    private long num;
+    private long randNum;
     private long power;
     private long mod;
-    public FastPow(long num, long power, long mod){
-        this.num=num;
+    public FastPow(long randNum, long power, long mod){
+        this.randNum=randNum;
         this.power =power;
         this.mod=mod;
     }
 
     private ArrayList<Integer> factorizeNum(){
-        //получаем разложение степени на степени двойки
         long power = this.power;
         ArrayList<Integer> powers = new ArrayList<>();
 
@@ -35,6 +32,8 @@ public class FastPow {
     private long getRemainingFromMultiplication(long rem1, long rem2){
         //алгоритм сложения-удвоения
         long mod = this.mod;
+        rem1+=this.mod;
+        rem2+=this.mod;//in case if rem1 and rem2 both equals to zero
         long a = Math.min(rem1,rem2);
         long b = Math.max(rem1,rem2);
         long c = 0;
@@ -62,11 +61,10 @@ public class FastPow {
 
     public long run(){
         ArrayList<Integer> powers = factorizeNum();
-        if(powers.size()==0) return 1;
 
         ArrayList<Long> rems = new ArrayList<>();
         for(int i=0;i<powers.size();i++){
-            rems.add(this.num % this.mod);
+            rems.add(this.randNum % this.mod);
         }
 
         while(powers.get(0)!=0){
@@ -85,7 +83,7 @@ public class FastPow {
         for(int i=1;i<rems.size();i++){
             rems.set(0,getRemainingFromMultiplication(rems.get(0),rems.get(i)));
         }
+
         return rems.get(0);
     }
 }
-
