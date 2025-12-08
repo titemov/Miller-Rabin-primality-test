@@ -27,7 +27,7 @@ public class Backend {
     }
 
     private long getD(int s){
-        return (long) ((this.num-1)/Math.pow(2,s));
+        return ((this.num-1)/(long)Math.pow(2,s));
     }
 
     private long getRandomNum(){
@@ -61,6 +61,7 @@ public class Backend {
                 System.out.println("Given number " + this.num + " is prime. Primarity witness: " + randNum+"\n");
             }else{
                 System.out.println("Given number " + this.num + " is not prime.\n");
+                break;
             }
 
             try {
@@ -69,9 +70,8 @@ public class Backend {
                 System.out.println("Error! "+e);
             }
         }
-
-        System.out.println("\nResult: "+k+" out of "+this.repeats+" iterations proved primarity of "+this.num);
         if(k==repeats){
+            System.out.println("\nResult: "+k+" out of "+this.repeats+" iterations proved primarity of "+this.num);
             return true;
         }else{
             return false;

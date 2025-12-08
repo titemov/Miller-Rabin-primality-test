@@ -1,13 +1,14 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class FastPow {
-    private long randNum;
+    private long base;
     private long power;
     private long mod;
-    public FastPow(long randNum, long power, long mod){
-        this.randNum=randNum;
-        this.power =power;
-        this.mod=mod;
+    public FastPow(long base, long power, long mod){
+        this.base = base;
+        this.power = power;
+        this.mod = mod;
     }
 
     private ArrayList<Integer> factorizeNum(){
@@ -30,10 +31,9 @@ public class FastPow {
     }
 
     private long getRemainingFromMultiplication(long rem1, long rem2){
-        //алгоритм сложения-удвоения
         long mod = this.mod;
-        rem1+=this.mod;
-        rem2+=this.mod;//in case if rem1 and rem2 both equals to zero
+        if(rem1==0) rem1+=this.mod;
+        if(rem2==0) rem2+=this.mod;//in case if rem1 and rem2 both equals to zero
         long a = Math.min(rem1,rem2);
         long b = Math.max(rem1,rem2);
         long c = 0;
@@ -64,11 +64,11 @@ public class FastPow {
 
         ArrayList<Long> rems = new ArrayList<>();
         for(int i=0;i<powers.size();i++){
-            rems.add(this.randNum % this.mod);
+            rems.add(this.base % this.mod);
         }
 
-        while(powers.get(0)!=0){
-            long temp = rems.get(0);
+        while(powers.getFirst()!=0){
+            long temp = rems.getFirst();
             long rem = getRemainingFromMultiplication(temp,temp);
 
             for(int n=0;n<powers.size();n++)
@@ -81,9 +81,9 @@ public class FastPow {
         }
 
         for(int i=1;i<rems.size();i++){
-            rems.set(0,getRemainingFromMultiplication(rems.get(0),rems.get(i)));
+            rems.set(0,getRemainingFromMultiplication(rems.getFirst(),rems.get(i)));
         }
 
-        return rems.get(0);
+        return rems.getFirst();
     }
 }

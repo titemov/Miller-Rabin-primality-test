@@ -5,6 +5,7 @@ public class Main{
     public static void main(String[] args){
         try {
             Scanner scanner = new Scanner(System.in);
+            //2305843009213693951 - prime
             System.out.print("Enter a number: ");
             long num = scanner.nextLong();
             if (num % 2 == 0) {
