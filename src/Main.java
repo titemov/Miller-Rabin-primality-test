@@ -5,21 +5,36 @@ public class Main{
     public static void main(String[] args){
         try {
             Scanner scanner = new Scanner(System.in);
+            boolean isTwo=false;
+            boolean result=false;
+
             //2305843009213693951 - prime
             System.out.print("Enter a number: ");
-            long num = scanner.nextLong();
-            if (num % 2 == 0) {
-                throw new Exception("Given number is even");
+            long inputNumber = scanner.nextLong();
+
+            if(inputNumber==2){
+                isTwo=true;
             }
-            if(num>Math.pow(2,62)-1){
+
+            if(inputNumber>Math.pow(2,62)-1 || inputNumber<2){
                 throw new InputMismatchException();
             }
-            System.out.print("Enter amount of repeats: ");
-            long repeats = scanner.nextLong();
+            if (inputNumber % 2 == 0) {
+                if(!isTwo) throw new Exception("Given number is even");
+            }
 
-            Backend b = new Backend(num,repeats);
-            boolean res = b.run();
-            if(res){
+            System.out.print("Enter repeats: ");
+            long repeats = scanner.nextLong();
+            if(repeats<1 || repeats>Math.pow(2,62)-1) throw new Exception("Incorrect repeat count");
+
+            System.out.println("Input number: "+inputNumber+"\n"+"Repeats: "+repeats);
+
+            if(!isTwo){
+                Backend b = new Backend(inputNumber,repeats);
+                result = b.run();
+            }
+
+            if(result || isTwo){
                 System.out.println("==============================");
                 System.out.println("||   This number is prime   ||");
                 System.out.println("==============================");
